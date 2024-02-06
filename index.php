@@ -212,7 +212,6 @@
                                             <td><?php echo $row["ticket_title"];   ?></td>
                                             <td><?php echo $row["parent_id"];   ?></td>
                                             <td><?php echo $row["ticket_status"];   ?></td>
-
                                             <!-- syntax php untuk durasi -->
                                             <?php
                                                 date_default_timezone_set('Asia/Jakarta');
@@ -243,7 +242,6 @@
                                     }
                                     ?>
                                 </table>
-                                </div>
                             </div>
                         </div>
                     </div>
@@ -251,8 +249,6 @@
             </div>
             <!-- /#page-wrapper -->
         </div>
-
-        
         <!-- /#wrapper -->
 
         <!-- jQuery -->
