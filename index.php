@@ -15,16 +15,16 @@
         <title>Dashboard WJA</title>
 	
         <!-- Bootstrap Core CSS -->
-        <link href="../css/bootstrap.min.css" rel="stylesheet">
+        <link href="css/bootstrap.min.css" rel="stylesheet">
 
         <!-- MetisMenu CSS -->
-        <link href="../css/metisMenu.min.css" rel="stylesheet">
+        <link href="css/metisMenu.min.css" rel="stylesheet">
 
         <!-- Custom CSS -->
-        <link href="../css/startmin.css" rel="stylesheet">
+        <link href="css/startmin.css" rel="stylesheet">
 
         <!-- Custom Fonts -->
-        <link href="../css/font-awesome.min.css" rel="stylesheet" type="text/css">
+        <link href="css/font-awesome.min.css" rel="stylesheet" type="text/css">
 
         <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
         <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -167,7 +167,7 @@
                                     <div class="col-xs-9 text-right">
                                         <div class="huge">
                                         <?php
-                                            $sql2="SELECT * FROM `wja` WHERE `ticket_status`=' Open ' AND `ticketcategories`=' Technical Complaint '";
+                                            $sql2="SELECT * FROM `wja` WHERE (`ticket_status`=' Open ' OR `ticket_status`=' Re-Open ') AND `ticketcategories`=' Technical Complaint '";
                                             $hasil2=mysqli_query($link,$sql2);
                                             $no2=0;
                                             while ($row = mysqli_fetch_array($hasil2)) {
@@ -185,7 +185,7 @@
                         <div class="col-lg-12 col-md-6">
                             <div class="container-fluid">
                                 <div class="table-wrapper-scroll-x">
-                                <table border="1" width="800px" class="table table-striped table-bordered table-hover table-responsive">
+                                <table style="border: 1px solid black;" class="table table-striped table-bordered table-hover table-responsive">
                                     <tr>
                                         <th style="text-align: center;">No</th>
                                         <th style="text-align: center;">Nomor Jaringan</th>
@@ -212,7 +212,8 @@
                                             <td><?php echo $row["ticket_title"];   ?></td>
                                             <td><?php echo $row["parent_id"];   ?></td>
                                             <td><?php echo $row["ticket_status"];   ?></td>
-                                            <td>
+
+                                            <!-- syntax php untuk durasi -->
                                             <?php
                                                 date_default_timezone_set('Asia/Jakarta');
                                                 $waktuSekarang = time();
@@ -222,10 +223,17 @@
                                                 // Konversi
                                                 $jam = floor($durasiDetik / 3600);
                                                 $menit = floor(($durasiDetik % 3600) / 60);
-
-                                                // hasil
-                                                echo "$jam jam $menit menit";            
                                             ?>
+                                            <td style="<?php
+                                                if ($row["ticketcategories"] == ' Technical Complaint ' && $row["ticket_status"] == ' Open ') {
+                                                    if ($jam >= 3) {
+                                                        echo 'background-color: #FF6767;';
+                                                    } else if ($jam >= 2 && $jam < 3) {
+                                                        echo 'background-color: #FCFF67;';
+                                                    }
+                                                }
+                                            ?>">
+                                                <?php echo "$jam jam $menit menit"; ?>
                                             </td>
                                             <td><?php echo $row["ticketcategories"];   ?></td>
                                             <td><?php echo $row["createdtime"];   ?></td>
@@ -248,16 +256,16 @@
         <!-- /#wrapper -->
 
         <!-- jQuery -->
-        <script src="../js/jquery.min.js"></script>
+        <script src="js/jquery.min.js"></script>
 
         <!-- Bootstrap Core JavaScript -->
-        <script src="../js/bootstrap.min.js"></script>
+        <script src="js/bootstrap.min.js"></script>
 
         <!-- Metis Menu Plugin JavaScript -->
-        <script src="../js/metisMenu.min.js"></script>
+        <script src="js/metisMenu.min.js"></script>
 
         <!-- Custom Theme JavaScript -->
-        <script src="../js/startmin.js"></script>
+        <script src="js/startmin.js"></script>
 
 
     </body>
