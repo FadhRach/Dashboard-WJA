@@ -221,6 +221,7 @@
                                             </tr>
                                         </thead>
                                         <tbody>
+                                            <!-- buat kedepannya harus kayak gimana pake width -->
                                             <tr class="bg-white border-b hover:bg-gray-50 text-2xl">
                                                 <td class="px-6 py-2">
                                                     1
