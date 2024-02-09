@@ -189,7 +189,7 @@
                             <div class="container-fluid">
                                 <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
                                     <table class="w-full text-sm text-left text-gray-500">
-                                        <thead class="text-xl text-gray-700 uppercase bg-gray-50">
+                                        <thead class="text-lg lg:text-xl text-gray-700 uppercase bg-gray-50">
                                             <tr>
                                                 <th scope="col" class="px-6 py-3">
                                                     No
@@ -220,38 +220,67 @@
                                                 </th>
                                             </tr>
                                         </thead>
+                                        <?php
+                                            $sql="select * from wja order by ticketcategories desc, ticket_status desc, createdtime asc";
+                                            $hasil=mysqli_query($link,$sql);
+                                            $no=0;
+                                            while ($row = mysqli_fetch_array($hasil)) {
+                                            $no++;
+                                        ?>
                                         <tbody>
-                                            <!-- buat kedepannya harus kayak gimana pake width -->
-                                            <tr class="bg-white border-b hover:bg-gray-50 text-2xl">
+                                            <tr class="bg-white border-b hover:bg-gray-50 text-xl lg:text-2xl">
                                                 <td class="px-6 py-2">
-                                                    1
+                                                    <?php echo $no;?>
                                                 </td>
                                                 <td class="px-6 py-2">
-                                                    2024301301
+                                                    <?php echo $row["service_instance_id"];?>
                                                 </td>
                                                 <td class="px-6 py-2">
-                                                    2024-000000002
+                                                    <?php echo $row["ticket_no"];?>
                                                 </td>
                                                 <td class="px-6 py-2" style="white-space: nowrap;">
-                                                    2010006320 - S1DMJLA031 / S1BMJL01UC - DISKOM GANGGUAN
+                                                    <?php echo $row["ticket_title"];?>
                                                 </td>
                                                 <td class="px-6 py-2" style="white-space: nowrap;">
-                                                    DINAS KOMUNIKASI DAN INFORMATIKA KOTA CIMAHI
+                                                    <?php echo $row["parent_id"];?>
                                                 </td>
                                                 <td class="px-6 py-2">
-                                                    Open
+                                                    <?php echo $row["ticket_status"];?>
+                                                </td>
+                                                <!-- syntax php untuk durasi -->
+                                                <?php
+                                                    date_default_timezone_set('Asia/Jakarta');
+                                                    $waktuSekarang = time();
+                                                    $createdTime = strtotime($row["createdtime"]);
+                                                    $durasiDetik = $waktuSekarang - $createdTime;
+
+                                                    // Konversi
+                                                    $jam = floor($durasiDetik / 3600);
+                                                    $menit = floor(($durasiDetik % 3600) / 60);
+                                                ?>
+                                                <td class="px-6 py-2"
+                                                style="<?php
+                                                    if ($row["ticketcategories"] == ' Technical Complaint ' && $row["ticket_status"] == ' Open ') {
+                                                        if ($jam >= 3) {
+                                                            echo 'background-color: #FF6767;';
+                                                        } else if ($jam >= 2 && $jam < 3) {
+                                                            echo 'background-color: #FCFF67;';
+                                                        }
+                                                    }
+                                                ?>">
+                                                    <?php echo "$jam jam $menit menit"; ?>
                                                 </td>
                                                 <td class="px-6 py-2">
-                                                    27 jam 43 menit
-                                                </td>
-                                                <td class="px-6 py-2">
-                                                    Technical Complaint
+                                                    <?php echo $row["ticketcategories"];?>
                                                 </td>
                                                 <td>
-                                                    06-02-2024 07:59 AM
+                                                    <?php echo $row["createdtime"];?>
                                                 </td>
                                             </tr>
                                         </tbody>
+                                        <?php
+                                            }
+                                        ?>
                                     </table>
                                 </div>
                             </div>

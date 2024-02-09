@@ -27,6 +27,10 @@ body {
     }
 }
 
+.page-wrapper {
+    width: 100%;
+}
+
 .navbar-header {
     float: left;
 }
