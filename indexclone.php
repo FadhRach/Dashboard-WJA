@@ -227,53 +227,53 @@
                                             while ($row = mysqli_fetch_array($hasil)) {
                                             $no++;
                                         ?>
+                                        <!-- syntax php untuk durasi -->
+                                        <?php
+                                            date_default_timezone_set('Asia/Jakarta');
+                                            $waktuSekarang = time();
+                                            $createdTime = strtotime($row["createdtime"]);
+                                            $durasiDetik = $waktuSekarang - $createdTime;
+
+                                            // Konversi
+                                            $jam = floor($durasiDetik / 3600);
+                                            $menit = floor(($durasiDetik % 3600) / 60);
+                                        ?>
                                         <tbody>
-                                            <tr class="bg-white border-b hover:bg-gray-50 text-xl lg:text-2xl">
-                                                <td class="px-6 py-2">
+                                            <tr class="bg-white border-b hover:bg-gray-50 text-lg lg:text-xl text-black"
+                                            style="<?php
+                                                if ($row["ticketcategories"] == ' Technical Complaint ' && $row["ticket_status"] == ' Open ') {
+                                                    if ($jam >= 3) {
+                                                        echo 'background-color: #FF6767;';
+                                                    } else if ($jam >= 2 && $jam < 3) {
+                                                        echo 'background-color: #FCFF67;';
+                                                    }
+                                                }   
+                                            ?>">
+                                                <td class="px-6 py-4">
                                                     <?php echo $no;?>
                                                 </td>
-                                                <td class="px-6 py-2">
+                                                <td class="px-6 py-4">
                                                     <?php echo $row["service_instance_id"];?>
                                                 </td>
-                                                <td class="px-6 py-2">
+                                                <td class="px-6 py-4">
                                                     <?php echo $row["ticket_no"];?>
                                                 </td>
-                                                <td class="px-6 py-2" style="white-space: nowrap;">
+                                                <td class="px-6 py-4" style="white-space: nowrap;">
                                                     <?php echo $row["ticket_title"];?>
                                                 </td>
-                                                <td class="px-6 py-2" style="white-space: nowrap;">
+                                                <td class="px-6 py-4" style="white-space: nowrap;">
                                                     <?php echo $row["parent_id"];?>
                                                 </td>
-                                                <td class="px-6 py-2">
+                                                <td class="px-6 py-4">
                                                     <?php echo $row["ticket_status"];?>
                                                 </td>
-                                                <!-- syntax php untuk durasi -->
-                                                <?php
-                                                    date_default_timezone_set('Asia/Jakarta');
-                                                    $waktuSekarang = time();
-                                                    $createdTime = strtotime($row["createdtime"]);
-                                                    $durasiDetik = $waktuSekarang - $createdTime;
-
-                                                    // Konversi
-                                                    $jam = floor($durasiDetik / 3600);
-                                                    $menit = floor(($durasiDetik % 3600) / 60);
-                                                ?>
-                                                <td class="px-6 py-2"
-                                                style="<?php
-                                                    if ($row["ticketcategories"] == ' Technical Complaint ' && $row["ticket_status"] == ' Open ') {
-                                                        if ($jam >= 3) {
-                                                            echo 'background-color: #FF6767;';
-                                                        } else if ($jam >= 2 && $jam < 3) {
-                                                            echo 'background-color: #FCFF67;';
-                                                        }
-                                                    }
-                                                ?>">
+                                                <td class="px-6 py-4">
                                                     <?php echo "$jam jam $menit menit"; ?>
                                                 </td>
-                                                <td class="px-6 py-2">
+                                                <td class="px-6 py-4">
                                                     <?php echo $row["ticketcategories"];?>
                                                 </td>
-                                                <td>
+                                                <td  class="px-6 py-4">
                                                     <?php echo $row["createdtime"];?>
                                                 </td>
                                             </tr>
