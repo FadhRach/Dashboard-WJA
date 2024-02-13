@@ -185,104 +185,66 @@
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-lg-12 col-md-12">
+                        <div class="col-lg-12 col-md-6">
                             <div class="container-fluid">
-                                <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
-                                    <table class="w-full text-sm text-left text-gray-500">
-                                        <thead class="text-lg lg:text-xl text-gray-700 uppercase bg-gray-50">
-                                            <tr>
-                                                <th scope="col" class="px-6 py-3">
-                                                    No
-                                                </th>
-                                                <th scope="col" class="px-6 py-3">
-                                                    Nomor Jaringan
-                                                </th>
-                                                <th scope="col" class="px-6 py-3">
-                                                    Nomor Tiket
-                                                </th>
-                                                <th scope="col" class="px-6 py-3">
-                                                    Deskripsi Gangguan
-                                                </th>
-                                                <th scope="col" class="px-6 py-3">
-                                                    Nama Pelanggan
-                                                </th>
-                                                <th scope="col" class="px-6 py-3">
-                                                    Status
-                                                </th>
-                                                <th scope="col" class="px-6 py-3">
-                                                    Durasi (Case Age)
-                                                </th>
-                                                <th scope="col" class="px-6 py-3">
-                                                    Kategori
-                                                </th>
-                                                <th scope="col" class="px-6 py-3">
-                                                    Start Tiket
-                                                </th>
-                                            </tr>
-                                        </thead>
-                                        <?php
-                                            $sql="select * from wja order by ticketcategories desc, ticket_status desc, createdtime asc";
-                                            $hasil=mysqli_query($link,$sql);
-                                            $no=0;
-                                            while ($row = mysqli_fetch_array($hasil)) {
-                                            $no++;
-                                        ?>
-                                        <!-- syntax php untuk durasi -->
-                                        <?php
-                                            date_default_timezone_set('Asia/Jakarta');
-                                            $waktuSekarang = time();
-                                            $createdTime = strtotime($row["createdtime"]);
-                                            $durasiDetik = $waktuSekarang - $createdTime;
+                                <div class="table-wrapper-scroll-x">
+                                <table style="border: 1px solid black;" class="table table-striped table-bordered table-hover table-responsive">
+                                    <tr>
+                                        <th style="text-align: center;">No</th>
+                                        <th style="text-align: center;">Nomor Jaringan</th>
+                                        <th style="text-align: center;">Nomor Tiket</th>
+                                        <th style="text-align: center;">Deskripsi Gangguan</th>
+                                        <th style="text-align: center;">Nama Pelanggan</th>
+                                        <th style="text-align: center;">Status</th>
+                                        <th style="text-align: center;">Durasi      (Case Age)</th>
+                                        <th style="text-align: center;">Kategori</th>
+                                        <th style="text-align: center;">Start Tiket</th>
+                                    </tr>
+                                    <?php
+                                        $sql="select * from wja order by ticketcategories desc, ticket_status desc, createdtime asc";
+                                        $hasil=mysqli_query($link,$sql);
+                                        $no=0;
+                                        while ($row = mysqli_fetch_array($hasil)) {
+                                        $no++;
+                                    ?>
+                                    <tbody>
+                                        <tr class= <?php include "class.php" ?>>
+                                            <td><?php echo $no;?></td>
+                                            <td><?php echo $row["service_instance_id"]; ?></td>
+                                            <td><?php echo $row["ticket_no"];   ?></td>
+                                            <td><?php echo $row["ticket_title"];   ?></td>
+                                            <td><?php echo $row["parent_id"];   ?></td>
+                                            <td><?php echo $row["ticket_status"];   ?></td>
+                                            <!-- syntax php untuk durasi -->
+                                            <?php
+                                                date_default_timezone_set('Asia/Jakarta');
+                                                $waktuSekarang = time();
+                                                $createdTime = strtotime($row["createdtime"]);
+                                                $durasiDetik = $waktuSekarang - $createdTime;
 
-                                            // Konversi
-                                            $jam = floor($durasiDetik / 3600);
-                                            $menit = floor(($durasiDetik % 3600) / 60);
-                                        ?>
-                                        <tbody>
-                                            <tr class="bg-white border-b hover:bg-gray-50 text-lg lg:text-xl text-black"
-                                            style="<?php
+                                                // Konversi
+                                                $jam = floor($durasiDetik / 3600);
+                                                $menit = floor(($durasiDetik % 3600) / 60);
+                                            ?>
+                                            <td style="<?php
                                                 if ($row["ticketcategories"] == ' Technical Complaint ' && $row["ticket_status"] == ' Open ') {
                                                     if ($jam >= 3) {
                                                         echo 'background-color: #FF6767;';
                                                     } else if ($jam >= 2 && $jam < 3) {
                                                         echo 'background-color: #FCFF67;';
                                                     }
-                                                }   
+                                                }
                                             ?>">
-                                                <td class="px-6 py-4">
-                                                    <?php echo $no;?>
-                                                </td>
-                                                <td class="px-6 py-4">
-                                                    <?php echo $row["service_instance_id"];?>
-                                                </td>
-                                                <td class="px-6 py-4">
-                                                    <?php echo $row["ticket_no"];?>
-                                                </td>
-                                                <td class="px-6 py-4" style="white-space: nowrap;">
-                                                    <?php echo $row["ticket_title"];?>
-                                                </td>
-                                                <td class="px-6 py-4" style="white-space: nowrap;">
-                                                    <?php echo $row["parent_id"];?>
-                                                </td>
-                                                <td class="px-6 py-4">
-                                                    <?php echo $row["ticket_status"];?>
-                                                </td>
-                                                <td class="px-6 py-4">
-                                                    <?php echo "$jam jam $menit menit"; ?>
-                                                </td>
-                                                <td class="px-6 py-4">
-                                                    <?php echo $row["ticketcategories"];?>
-                                                </td>
-                                                <td  class="px-6 py-4">
-                                                    <?php echo $row["createdtime"];?>
-                                                </td>
-                                            </tr>
-                                        </tbody>
-                                        <?php
-                                            }
-                                        ?>
-                                    </table>
-                                </div>
+                                                <?php echo "$jam jam $menit menit"; ?>
+                                            </td>
+                                            <td><?php echo $row["ticketcategories"];   ?></td>
+                                            <td><?php echo $row["createdtime"];   ?></td>
+                                        </tr>
+                                    </tbody>
+                                    <?php
+                                    }
+                                    ?>
+                                </table>
                             </div>
                         </div>
                     </div>
