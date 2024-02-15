@@ -64,7 +64,7 @@
                                 <a href="/backupconfig/index.html"><i class="fa fa-edit fa-fw"></i> B/U Config Pelanggan KAM</a>
                             </li>
 			                <li>
-                                <a href="ggnberulang/index.php"><i class="fa fa-edit fa-fw"></i> Data Gangguan Berulang</a>
+                                <a href="/ggnberulang/index.php"><i class="fa fa-edit fa-fw"></i> Data Gangguan Berulang</a>
                             </li>
                             <li>
                                 <a href="register.php" > <i class="fa fa-edit fa-fw"></i> Register</a>    
@@ -224,7 +224,10 @@
                                             </tr>
                                         </thead>
                                         <?php
-                                            $sql="select * from wja order by ticketcategories desc, ticket_status desc, createdtime asc";
+                                            $sql="SELECT * FROM wja 
+                                            WHERE ticketcategories = ' Preventive Maintenance Request ' 
+                                            OR ticketcategories = ' Request '
+                                            ORDER BY ticketcategories DESC, ticket_status DESC, createdtime ASC";
                                             $hasil=mysqli_query($link,$sql);
                                             $no=0;
                                             while ($row = mysqli_fetch_array($hasil)) {

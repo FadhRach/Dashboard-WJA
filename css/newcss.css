@@ -1,0 +1,21 @@
+/* Tiket Ketika di Hover */ 
+div#totaltiket_p:hover{
+    background-color: #2B6597;
+    border-color: #2B6597;
+}
+
+div#stopclock_p:hover{
+    background-color: #428142;
+    border-color: #428142;
+}
+
+div#tiketpm_p:hover{
+    background-color: #B3813B;
+    border-color: #B3813B;
+}
+
+div#ggnopen_p:hover{
+    background-color: #9A3B39;
+    border-color: #9A3B39;
+}
+
