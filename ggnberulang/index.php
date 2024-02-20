@@ -1,13 +1,3 @@
-<?php 
- 
-session_start();
- 
-if (!isset($_SESSION['username'])) {
-  
-}
- 
-?>
-
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -20,7 +10,7 @@ if (!isset($_SESSION['username'])) {
        <?php
         $url=$_SERVER['REQUEST_URI'];
         header("Refresh: 600; URL=$url");
-	include "../koneksi.php";
+	    include "../koneksi.php";
         ?>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">

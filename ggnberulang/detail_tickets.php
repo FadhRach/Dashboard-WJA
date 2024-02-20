@@ -104,23 +104,27 @@
                            <th style="text-align: center;">Deskripsi Gangguan</th>
                            <th style="text-align: center;">Tanggal</th>
                         </tr>
-        <?php
-        $no=0;
-		$query = mysqli_query($link,"select * from tiket where service_instance_id ='$id'");
-		while ($data = mysqli_fetch_array($query)) {
-            $no++;
-            ?>
-        <tbody>
-            <tr>
-                <td><?php echo $no;?></td>
-                <td><?php echo $data["ticket_no"];   ?></td>
-                <td><?php echo $data["ticket_title"];   ?></td>
-                <td><?php echo $data["createdtime"];   ?></td>
-            </tr>
-        </tbody>
-    <?php
-        }
-        ?>		
+                        <?php
+                        $no = 0;
+                        $currentMonth = date('m');
+                        $currentYear = date('Y');
+
+                        $query = mysqli_query($link, "SELECT * FROM tiket WHERE service_instance_id ='$id' AND MONTH(STR_TO_DATE(createdtime, '%d-%m-%Y %h:%i %p')) = $currentMonth AND YEAR(STR_TO_DATE(createdtime, '%d-%m-%Y %h:%i %p')) = $currentYear");
+
+                        while ($data = mysqli_fetch_array($query)) {
+                            $no++;
+                        ?>
+                            <tbody>
+                                <tr>
+                                    <td><?php echo $no; ?></td>
+                                    <td><?php echo $data["ticket_no"]; ?></td>
+                                    <td><?php echo $data["ticket_title"]; ?></td>
+                                    <td><?php echo $data["createdtime"]; ?></td>
+                                </tr>
+                            </tbody>
+                        <?php
+                        }
+                        ?>	
 			</div>
 			</div>
                     </div>
