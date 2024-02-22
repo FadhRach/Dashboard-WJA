@@ -55,11 +55,11 @@
                     <div class="sidebar-nav navbar-collapse">
                         <ul class="nav" id="side-menu">
                             <li>
-                                <a href="index.php"><i class="fa fa-dashboard fa-fw"></i> Dashboard Gangguan</a>
+                                <a href="index.php"><i class="fa fa-dashboard fa-fw"></i> Dashboard Gangguan</a>    
                             </li>
                             
                                                         <li>
-                                <a href="/backupconfig/index.html"><i class="fa fa-edit fa-fw"></i> Back Up Config Pelanggan KAM</a>
+                                <a href="/backupconfig/index.html"><i class="fa fa-edit fa-fw"></i> B/U Config Pelanggan KAM</a>
                             </li>
 							<li>
                                 <a href="/ggnberulang/index.php"><i class="fa fa-edit fa-fw"></i> Data Gangguan Berulang</a>

@@ -41,37 +41,28 @@
     </head>
     <body>
     <div>
-    <div>
-    
-
         <div id="wrapper">
-
             <!-- Navigation -->
             <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
                 <div class="navbar-header">
                     <a class="navbar-brand">WEST JAVA AREA</a>
                 </div>
-
                 <ul class="nav navbar-nav navbar-left navbar-top-links">
                     <li><a href="#"><i class="fa fa-home fa-fw"></i> Lintasarta Bandung</a></li>
                 </ul>
-
-                
                 <!-- /.navbar-top-links -->
-
                 <div class="navbar-default sidebar" role="navigation">
-                    <div class="sidebar-nav navbar-collapse">
+                    <div class="sidebar-nav navbar-collapse">   
                         <ul class="nav" id="side-menu">
-                            
                             <li>
                                 <a href="../index.php"><i class="fa fa-dashboard fa-fw"></i> Dashboard Gangguan</a>
                             </li>
                             
                             <li>
-                                <a href="/backupconfig/index.html"><i class="fa fa-edit fa-fw"></i> Back Up Config Pelanggan KAM</a>
+                                <a href="/backupconfig/index.php"><i class="fa fa-edit fa-fw"></i> Back Up Config Pelanggan KAM</a>
                             </li>
 							<li>
-                                <a href="/ggnberulang/index.html"><i class="fa fa-edit fa-fw"></i> Data Gangguan Berulang</a>
+                                <a href="/ggnberulang/index.php"><i class="fa fa-edit fa-fw"></i> Data Gangguan Berulang</a>
                             </li>
                             <li>
                                 <a href="register.php" > <i class="fa fa-edit fa-fw"></i> Register</a>    
@@ -79,36 +70,23 @@
                             <li>
                                 <a href="logout.php" > <i class="fa fa-sign-out"></i> Logout</a>    
                             </li>
-                            
                         </ul>
                     </div>
                     <!-- /.sidebar-collapse -->
-                </div>
-                <!-- /.navbar-static-side -->
+                </div>  
+            <!-- /.navbar-static-side -->
             </nav>
-            <div>
-   
+
             <!-- Page Content -->
             <div id="page-wrapper">
                 <div class="container-fluid">
                     <div class="row">
-                    
-                   
                         <div class="col-lg-12">
-                        <div class="text-left">
-                    <div class="page-header">
-    <form action="" method="POST" class="login-email">
-    
-        <?php echo "<h3>Selamat Datang, "  .$_SESSION['username'] ."!". "</h3>"; ?>
-        <div class="input-group">
-            
-        </div>
-    </form>
-</div>
-                            <h1 class="page-header">Data Gangguan Berulang</h1>
+                            <div class="text-left">
+                                <h1 class="page-header">Data Gangguan Berulang</h1>
+                            </div>
                         </div>
                     </div>
-                                    </div>
                     <!-- /.row -->
                     <div class="row">
                         <div class="col-lg-6 col-md-6">
@@ -120,23 +98,21 @@
                                         </div>
                                         <div class="col-xs-9 text-right">
                                             <div class="huge">
-    <?php
-        $sql="select * from berulang order by tickets asc";
-        $hasil=mysqli_query($link,$sql);
-        $no=0;
-while ($row = mysqli_fetch_array($hasil)) {
-            $no++;}
-            echo $no;
-            ?>
-    <?php
-        $sqla="select * from tiket order by ticket_no asc";
-        $hasila=mysqli_query($link,$sqla);
-        $noa=0;
-while ($rowa = mysqli_fetch_array($hasila)) {
-            $noa++;}
-            
-            ?>    
-                
+                                                <?php
+                                                    $sql="select * from berulang order by tickets asc";
+                                                    $hasil=mysqli_query($link,$sql);
+                                                    $no=0;
+                                                    while ($row = mysqli_fetch_array($hasil)) {
+                                                        $no++;}
+                                                    echo $no;
+                                                ?>
+                                                <?php
+                                                    $sqla="select * from tiket order by ticket_no asc";
+                                                    $hasila=mysqli_query($link,$sqla);
+                                                    $noa=0;
+                                                        while ($rowa = mysqli_fetch_array($hasila)) {
+                                                    $noa++;}       
+                                                ?>    
                                             </div>
                                             <div>CASE BERULANG DALAM 1 BULAN</div>
                                         </div>
@@ -153,7 +129,7 @@ while ($rowa = mysqli_fetch_array($hasila)) {
                                         </div>
                                         <div class="col-xs-9 text-right">
                                             <div class="huge">
-<?php echo $noa++;?>
+                                                <?php echo $noa++;?>
                                             </div>
                                             <div>CASE BERULANG DALAM PERIODE TERTENTU</div>
                                         </div>
@@ -161,151 +137,135 @@ while ($rowa = mysqli_fetch_array($hasila)) {
                                 </div>
                             </div>
                         </div>
-			<div class="row">
+			            <div class="row">
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="card">
+                                            <div class="card-body">
+                                                <table class="table table-striped">
+                                                    <div class="col-lg-6 col-md-6"> 
+                                                        <div class="col-xs-9 text-left">
+                                                            <table border="1" width="800px" class="table table-striped table-bordered table-hover table-responsive">
+                                                                <tr>
+                                                                    <th style="text-align: center;">No</th>
+                                                                    <th style="text-align: center;">Nomor Jaringan</th>
+                                                                    <th style="text-align: center;">Nama Pelanggan</th>
+                                                                    <th colspan="2" style="text-align: center;"style="text-align: center;">Jumlah Tiket</th>
+                                                                </tr>
+                                                                <?php
+                                                                    $sql="select * from berulang order by tickets asc";
+                                                                    $hasil=mysqli_query($link,$sql);
+                                                                    $no=0;
+                                                                    while ($row = mysqli_fetch_array($hasil)) {
+                                                                        $no++;
+                                                                ?>
+                                                                <tbody>
+                                                                    <tr>
+                                                                        <td><?php echo $no;?></td>
+                                                                        <td><?php echo $row["service_instance_id"]; ?></td>
+                                                                        <td><?php echo $row["parent_id"];   ?></td>
+                                                                        <td><?php echo $row["tickets"];   ?></td>
+                                                                        <td><a href="detail_tickets.php?id=<?php echo $row["service_instance_id"]; ?>"><i class="fa fa-eye fa-fw"</a></td>
+                                                                    </tr>
+                                                                </tbody>
+                                                                <?php
+                                                                    }
+                                                                    ?>	
+                                                            </table>
+                                                        </div>
+                                                    </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="card">
+                                                    <div class="card-body">
+                                                        <table class="table table-striped">
+                                                            <div class="container mt-4">
+                                                                <!-- form filter data berdasarkan range tanggal  -->
+                                                                <form action="index.php" method="get">
+                                                                    <div class="row g-3 align-items-center">
+                                                                    </div>
+                                                                        <div class="col-auto">
+                                                                        <div class="col-md-2">
+                                                                            Start Date :
+                                                                            <input type="date" class="form-control" name="start_date" required>
+                                                                        </div>
+                                                                    
+                                                                        <div class="col-md-2">
+                                                                            End Date :
+                                                                            <input type="date" class="form-control" name="end_date" required>
+                                                                        </div>
+                                                                        .
+                                                                        <div class="col-auto">
+                                                                            <button class="btn btn-primary" type="submit">Search</button>
+                                                                        </div>
+                                                                    </div>
+                                                                </form>
+                                                <div class="container mt-4">
+                                                    <!-- ... -->
+                                                    <form action="index.php" method="get">
+                                                        <div class="row g-3 align-items-center">
+                                                            <!-- ... -->
+                                                        </div>
+                                                    </form>
+                                                </div>
 
+            <div class="col-xs-9 text-right">
+    <table border="1" width="800px" class="table table-striped table-bordered table-hover table-responsive">
+                            <tr>
+                            <th style="text-align: center;">No</th>
+                            <th style="text-align: center;">Nomor Jaringan</th>
+                            <th style="text-align: center;">Nama Pelanggan</th>
+                            <th colspan="2" style="text-align: center;"style="text-align: center;">Jumlah Tiket</th>
+                            </tr>
+        
+            <?php 
+                            //jika tanggal dari dan tanggal ke ada maka
+                            if(isset($_GET['start_date']) && isset($_GET['end_date'])){
+                                // tampilkan data yang sesuai dengan range tanggal yang dicari 
+                                $end_date = $_GET['end_date'] . " 23:59:00";
+                                $data = mysqli_query($link,
 
-
-<div class="container">
-    <div class="row">
-        <div class="col-md-6">
-            <div class="card">
-                <div class="card-body">
-                    <table class="table table-striped">
-                      <div class="col-lg-6 col-md-6"> 
-
-<div class="col-xs-9 text-left">
-<table border="1" width="800px" class="table table-striped table-bordered table-hover table-responsive">
-                        <tr>
-                           <th style="text-align: center;">No</th>
-                           <th style="text-align: center;">Nomor Jaringan</th>
-                           <th style="text-align: center;">Nama Pelanggan</th>
-                           <th colspan="2" style="text-align: center;"style="text-align: center;">Jumlah Tiket</th>
-                        </tr>
+                                "SELECT *, COUNT(ticket_no) AS tikets FROM tiket 
+                WHERE date_format >= '".$_GET['start_date']."' AND date_format <= '".$end_date."' 
+                GROUP BY service_instance_id, parent_id HAVING COUNT(ticket_no) > 1 
+                ORDER BY tikets DESC");
+                                
+                                
+                            }else{
+                                //jika tidak ada tanggal dari dan tanggal ke maka tampilkan seluruh data
+                                $data = mysqli_query($link, "SELECT *, COUNT(ticket_no) AS tikets FROM tiket GROUP BY service_instance_id, parent_id HAVING COUNT(ticket_no) > 1 
+                ORDER BY tikets DESC");		
+                            }
+                            // $no digunakan sebagai penomoran 
+                            $no = 1;
+                            // while digunakan sebagai perulangan data 
+                            while($A = mysqli_fetch_array($data)){
+                        ?>
+            <tbody>
+            
+                    <td><?php echo $no++;?></td>
+                    <td><?php echo $A["service_instance_id"]; ?></td>
+                    <td><?php echo $A["parent_id"];   ?></td>
+                    <td><?php echo $A ["tikets"];   ?></td>
+            <td><a href="detail_tickets.php?id=<?php echo $A["service_instance_id"]; ?>"><i class="fa fa-eye fa-fw"</a></td>
+                </tr>
+            </tbody>
         <?php
-        $sql="select * from berulang order by tickets asc";
-        $hasil=mysqli_query($link,$sql);
-        $no=0;
-while ($row = mysqli_fetch_array($hasil)) {
-            $no++;
-            ?>
-        <tbody>
-            <tr class= <?php include "class.php" ?>>
-                <td><?php echo $no;?></td>
-                <td><?php echo $row["service_instance_id"]; ?></td>
-                <td><?php echo $row["parent_id"];   ?></td>
-                <td><?php echo $row["tickets"];   ?></td>
-	       <td><a href="detail_tickets.php?id=<?php echo $row["service_instance_id"]; ?>"><i class="fa fa-eye fa-fw"</a></td>
-            </tr>
-        </tbody>
-    <?php
-        }
-        ?>	
-                    </table>
-                </div>
-            </div>
-        </div>
-        
-
-        
-        <div class="col-md-6">
-            <div class="card">
-                <div class="card-body">
-                    <table class="table table-striped">
-                    
-                        <div class="container mt-4">
-        <!-- form filter data berdasarkan range tanggal  -->
-        <form action="index.php" method="get">
-            <div class="row g-3 align-items-center">
-                </div>
-                <div class="col-auto">
-                    
-                <div class="col-md-2">
-                    Start Date :
-                    <input type="date" class="form-control" name="start_date" required>
-                </div>
-               
-                <div class="col-md-2">
-                    End Date :
-                    <input type="date" class="form-control" name="end_date" required>
-                </div>
-                .
-                <div class="col-auto">
-                    <button class="btn btn-primary" type="submit">Search</button>
-                </div>
-            </div>
-        </form>
-
-<div class="container mt-4">
-    <!-- ... -->
-    <form action="index.php" method="get">
-        <div class="row g-3 align-items-center">
-            <!-- ... -->
-        </div>
-    </form>
-</div>
-
-<div class="col-xs-9 text-right">
-<table border="1" width="800px" class="table table-striped table-bordered table-hover table-responsive">
-                        <tr>
-                           <th style="text-align: center;">No</th>
-                           <th style="text-align: center;">Nomor Jaringan</th>
-                           <th style="text-align: center;">Nama Pelanggan</th>
-                           <th colspan="2" style="text-align: center;"style="text-align: center;">Jumlah Tiket</th>
-                        </tr>
-      
-        <?php 
-                        //jika tanggal dari dan tanggal ke ada maka
-                        if(isset($_GET['start_date']) && isset($_GET['end_date'])){
-                            // tampilkan data yang sesuai dengan range tanggal yang dicari 
-                            $end_date = $_GET['end_date'] . " 23:59:00";
-                            $data = mysqli_query($link,
-
-                            "SELECT *, COUNT(ticket_no) AS tikets FROM tiket 
-            WHERE date_format >= '".$_GET['start_date']."' AND date_format <= '".$end_date."' 
-            GROUP BY service_instance_id, parent_id HAVING COUNT(ticket_no) > 1 
-            ORDER BY tikets DESC");
-                            
-                            
-                        }else{
-                            //jika tidak ada tanggal dari dan tanggal ke maka tampilkan seluruh data
-                            $data = mysqli_query($link, "SELECT *, COUNT(ticket_no) AS tikets FROM tiket GROUP BY service_instance_id, parent_id HAVING COUNT(ticket_no) > 1 
-            ORDER BY tikets DESC");		
-                        }
-                        // $no digunakan sebagai penomoran 
-                        $no = 1;
-                        // while digunakan sebagai perulangan data 
-                        while($A = mysqli_fetch_array($data)){
-                    ?>
-        <tbody>
-           
-                <td><?php echo $no++;?></td>
-                <td><?php echo $A["service_instance_id"]; ?></td>
-                <td><?php echo $A["parent_id"];   ?></td>
-                <td><?php echo $A ["tikets"];   ?></td>
-	       <td><a href="detail_tickets.php?id=<?php echo $A["service_instance_id"]; ?>"><i class="fa fa-eye fa-fw"</a></td>
-            </tr>
-        </tbody>
-    <?php
-        }
-        ?>	
-
-
-                    </table>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-
-
-
-			</div>
+            }
+            ?>	
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+			            </div>
                     </div>
                 </div>
-                    </div>
-                </div>
-
-            <!-- /#page-wrapper -->
+            </div>
+        </div>
+        <!-- /#page-wrapper -->
             
 
         </div>
