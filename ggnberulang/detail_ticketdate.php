@@ -57,6 +57,7 @@
                             <li>
                                 <a href="../index.php"><i class="fa fa-dashboard fa-fw"></i> Dashboard Gangguan</a>
                             </li>
+                            
                             <li>
                                 <a href="../backupconfig/index.php"><i class="fa fa-edit fa-fw"></i> Back Up Config Pelanggan KAM</a>
                             </li>
@@ -107,14 +108,19 @@
                            <th style="text-align: center;">Tanggal</th>
                         </tr>
                         <?php
-                        $no = 0;
-                        $currentMonth = date('m');
-                        $currentYear = date('Y');
+                            $id = $_GET['id'];
+                            $start_date = $_GET['start_date'];
+                            $end_date = $_GET['end_date'];
+                            
+                            $start_date_formatted = date('Y-m-d 00:00:00', strtotime($start_date));
+                            $end_date_formatted = date('Y-m-d 23:59:59', strtotime($end_date));
+                            
+                            $query = mysqli_query($link, "SELECT * FROM tiket WHERE service_instance_id ='$id' AND createdtime BETWEEN '$start_date_formatted' AND '$end_date_formatted'");
+                            
+                            $no = 0;
 
-                        $query = mysqli_query($link, "SELECT * FROM tiket WHERE service_instance_id ='$id' AND MONTH(STR_TO_DATE(createdtime, '%d-%m-%Y %h:%i %p')) = $currentMonth AND YEAR(STR_TO_DATE(createdtime, '%d-%m-%Y %h:%i %p')) = $currentYear");
-
-                        while ($data = mysqli_fetch_array($query)) {
-                            $no++;
+                            while ($data = mysqli_fetch_array($query)) {
+                                $no++;
                         ?>
                             <tbody>
                                 <tr>
@@ -125,8 +131,8 @@
                                 </tr>
                             </tbody>
                         <?php
-                        }
-                        ?>	
+                            }
+                        ?>
 			</div>
 			</div>
                     </div>

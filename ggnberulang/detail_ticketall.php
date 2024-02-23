@@ -57,6 +57,7 @@
                             <li>
                                 <a href="../index.php"><i class="fa fa-dashboard fa-fw"></i> Dashboard Gangguan</a>
                             </li>
+                            
                             <li>
                                 <a href="../backupconfig/index.php"><i class="fa fa-edit fa-fw"></i> Back Up Config Pelanggan KAM</a>
                             </li>
@@ -111,7 +112,7 @@
                         $currentMonth = date('m');
                         $currentYear = date('Y');
 
-                        $query = mysqli_query($link, "SELECT * FROM tiket WHERE service_instance_id ='$id' AND MONTH(STR_TO_DATE(createdtime, '%d-%m-%Y %h:%i %p')) = $currentMonth AND YEAR(STR_TO_DATE(createdtime, '%d-%m-%Y %h:%i %p')) = $currentYear");
+                        $query = mysqli_query($link, "SELECT * FROM tiket WHERE service_instance_id ='$id'");
 
                         while ($data = mysqli_fetch_array($query)) {
                             $no++;

@@ -59,13 +59,13 @@
                             </li>
                             
                             <li>
-                                <a href="/backupconfig/index.php"><i class="fa fa-edit fa-fw"></i> Back Up Config Pelanggan KAM</a>
+                                <a href="../backupconfig/index.php"><i class="fa fa-edit fa-fw"></i> Back Up Config Pelanggan KAM</a>
                             </li>
 							<li>
-                                <a href="/ggnberulang/index.php"><i class="fa fa-edit fa-fw"></i> Data Gangguan Berulang</a>
+                                <a href="../ggnberulang/index.php"><i class="fa fa-edit fa-fw"></i> Data Gangguan Berulang</a>
                             </li>
                             <li>
-                                <a href="register.php" > <i class="fa fa-edit fa-fw"></i> Register</a>    
+                                <a href="../register.php" > <i class="fa fa-edit fa-fw"></i> Register</a>    
                             </li>
                             <li>
                                 <a href="logout.php" > <i class="fa fa-sign-out"></i> Logout</a>    
@@ -210,50 +210,58 @@
                                                     </form>
                                                 </div>
 
-            <div class="col-xs-9 text-right">
-    <table border="1" width="800px" class="table table-striped table-bordered table-hover table-responsive">
-                            <tr>
-                            <th style="text-align: center;">No</th>
-                            <th style="text-align: center;">Nomor Jaringan</th>
-                            <th style="text-align: center;">Nama Pelanggan</th>
-                            <th colspan="2" style="text-align: center;"style="text-align: center;">Jumlah Tiket</th>
-                            </tr>
-        
-            <?php 
-                            //jika tanggal dari dan tanggal ke ada maka
-                            if(isset($_GET['start_date']) && isset($_GET['end_date'])){
-                                // tampilkan data yang sesuai dengan range tanggal yang dicari 
-                                $end_date = $_GET['end_date'] . " 23:59:00";
-                                $data = mysqli_query($link,
+                                        <div class="col-xs-9 text-right">
+                                            <table border="1" width="800px" class="table table-striped table-bordered table-hover table-responsive">
+                                                <tr>
+                                                    <th style="text-align: center;">No</th>
+                                                    <th style="text-align: center;">Nomor Jaringan</th>
+                                                    <th style="text-align: center;">Nama Pelanggan</th>
+                                                    <th colspan="2" style="text-align: center;"style="text-align: center;">Jumlah Tiket</th>
+                                                </tr>                          
+                                                <?php 
+                                                    //jika tanggal dari dan tanggal ke ada maka
+                                                    if(isset($_GET['start_date']) && isset($_GET['end_date'])){
+                                                        // tampilkan data yang sesuai dengan range tanggal yang dicari 
+                                                        $end_date = $_GET['end_date'] . " 23:59:00";
+                                                        $data = mysqli_query($link,
 
-                                "SELECT *, COUNT(ticket_no) AS tikets FROM tiket 
-                WHERE date_format >= '".$_GET['start_date']."' AND date_format <= '".$end_date."' 
-                GROUP BY service_instance_id, parent_id HAVING COUNT(ticket_no) > 1 
-                ORDER BY tikets DESC");
-                                
-                                
-                            }else{
-                                //jika tidak ada tanggal dari dan tanggal ke maka tampilkan seluruh data
-                                $data = mysqli_query($link, "SELECT *, COUNT(ticket_no) AS tikets FROM tiket GROUP BY service_instance_id, parent_id HAVING COUNT(ticket_no) > 1 
-                ORDER BY tikets DESC");		
-                            }
-                            // $no digunakan sebagai penomoran 
-                            $no = 1;
-                            // while digunakan sebagai perulangan data 
-                            while($A = mysqli_fetch_array($data)){
-                        ?>
-            <tbody>
-            
-                    <td><?php echo $no++;?></td>
-                    <td><?php echo $A["service_instance_id"]; ?></td>
-                    <td><?php echo $A["parent_id"];   ?></td>
-                    <td><?php echo $A ["tikets"];   ?></td>
-            <td><a href="detail_tickets.php?id=<?php echo $A["service_instance_id"]; ?>"><i class="fa fa-eye fa-fw"</a></td>
-                </tr>
-            </tbody>
-        <?php
-            }
-            ?>	
+                                                        "SELECT *, COUNT(ticket_no) AS tikets FROM tiket 
+                                                        WHERE date_format >= '".$_GET['start_date']."' AND date_format <= '".$end_date."' 
+                                                        GROUP BY service_instance_id, parent_id HAVING COUNT(ticket_no) > 1 
+                                                        ORDER BY tikets DESC");                                                          
+                                                    }else{
+                                                        //jika tidak ada tanggal dari dan tanggal ke maka tampilkan seluruh data
+                                                        $data = mysqli_query($link, "SELECT *, COUNT(ticket_no) AS tikets FROM tiket GROUP BY service_instance_id, parent_id HAVING COUNT(ticket_no) > 1 
+                                                        ORDER BY tikets DESC");		
+                                                    }
+                                                    // $no digunakan sebagai penomoran 
+                                                    $no = 1;
+                                                    // while digunakan sebagai perulangan data 
+                                                    while($A = mysqli_fetch_array($data)){
+                                                ?>
+                                                <tbody>
+                                                    <tr>
+                                                        <td><?php echo $no++;?></td>
+                                                        <td><?php echo $A["service_instance_id"]; ?></td>
+                                                        <td><?php echo $A["parent_id"];   ?></td>
+                                                        <td><?php echo $A ["tikets"];   ?></td>
+                                                        <?php
+                                                            if(isset($_GET['start_date']) && isset($_GET['end_date'])) {
+                                                                $detail_tickets_url = "detail_ticketdate.php?id=" . $A["service_instance_id"] . "&start_date=" . $_GET['start_date'] . "&end_date=" . $_GET['end_date'];
+                                                            } else {
+                                                                $detail_tickets_url = "detail_ticketall.php?id=" . $A["service_instance_id"];
+                                                            }
+                                                        ?>
+                                                        <td>
+                                                            <a href="<?php echo $detail_tickets_url; ?>">
+                                                                <i class="fa fa-eye fa-fw"></i>
+                                                            </a>
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                                <?php
+                                                    }
+                                                    ?>	
                                             </table>
                                         </div>
                                     </div>
