@@ -115,7 +115,7 @@
                             $start_date_formatted = date('Y-m-d 00:00:00', strtotime($start_date));
                             $end_date_formatted = date('Y-m-d 23:59:59', strtotime($end_date));
                             
-                            $query = mysqli_query($link, "SELECT * FROM tiket WHERE service_instance_id ='$id' AND createdtime BETWEEN '$start_date_formatted' AND '$end_date_formatted'");
+                            $query = mysqli_query($link, "SELECT * FROM tiket WHERE service_instance_id ='$id' AND date_format BETWEEN '$start_date_formatted' AND '$end_date_formatted'");
                             
                             $no = 0;
 
